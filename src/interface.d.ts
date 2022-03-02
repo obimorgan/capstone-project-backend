@@ -1,6 +1,6 @@
 import { Document, Model, Types } from 'mongoose'
 
-export interface IUser extends Document{
+interface IUser extends Document{
     _id: string
     name: string
     email: string
@@ -14,7 +14,7 @@ export interface IUser extends Document{
     games: Types.ObjectId[]
 }
 
-export interface INewuser {
+interface INewuser {
     _id: string
     name: string
     email: string
@@ -23,18 +23,48 @@ export interface INewuser {
     instagram: string
 }
 
-export interface IJWTPayload {
+interface IJWTPayload {
     _id: string,
     email: string
 }
 
-export interface IUserModel extends Model<IUser> {
+ interface IUserModel extends Model<IUser> {
     authenticate(email: string, plainPW: string): IUser | null
 }
 
-export interface IReqUser {
+interface IReqUser {
     tokens: {
         accessToken: string
         refreshToken: string
     }
+}
+
+interface IGame {
+    _id: string
+    gameName: string
+    users: IUserModel[]
+    scores: IHoles[]
+}
+
+interface IHoles {
+    gameName: IGame
+    hole1: number,
+    hole2: number,
+    hole3: number,
+    hole4: number,
+    hole5: number,
+    hole6: number,
+    hole7: number,
+    hole8: number,
+    hole9: number,
+    hole10: number,
+    hole11: number,
+    hole12: number,
+    hole13: number,
+    hole14: number,
+    hole15: number,
+    hole16: number,
+    hole17: number,
+    hole18: number,
+    hole19: number,
 }

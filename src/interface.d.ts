@@ -1,6 +1,7 @@
 import { Document, Model, Types } from 'mongoose'
 
 export interface IUser extends Document{
+    _id: string
     name: string
     email: string
     password: string
@@ -11,6 +12,15 @@ export interface IUser extends Document{
     instagramId: String
     refreshToken: String
     games: Types.ObjectId[]
+}
+
+export interface INewuser {
+    _id: string
+    name: string
+    email: string
+    facebookId: string
+    googleId: string
+    instagram: string
 }
 
 export interface IJWTPayload {
@@ -24,7 +34,7 @@ export interface IUserModel extends Model<IUser> {
 
 export interface IReqUser {
     tokens: {
-        accessJWT: string
-        refreshJWT: string
+        accessToken: string
+        refreshToken: string
     }
 }

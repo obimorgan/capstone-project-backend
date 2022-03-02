@@ -1,4 +1,4 @@
-import { NextFunction } from 'express'
+import { NextFunction, Response, Request } from 'express'
 import createHttpError from 'http-errors'
 import jwt from 'jsonwebtoken'
 import { IJWTPayload, IUser } from '../interface'
@@ -8,20 +8,20 @@ process.env.TS_NODE_DEV && require("dotenv").config()
 
 const { JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env
 
-// export const JWTAuth = async (req: Request, res: Response, next: NextFunction) => {
-//     if (!req.cookies.accessToken) {
-//         next(createHttpError(401, 'No access token provided in cookies.'))
-//     } else {
-//         try {
-//             const token = req.cookies.accessToken
-//             const payload = verifyJWT(token)
-//             req.payload = { _id: (await payload)._id, email: (await payload).email }
-//             next()
-//         } catch (error) {
-//             next(createHttpError(401, 'Invalid token in cookies.'))
-//         }
-//     }
-// }
+export const JWTAuth = async (req: Request, res: Response, next: NextFunction) => {
+    if (!req.headers.accessToken) {
+        next(createHttpError(401, 'No access token provided in cookies.'))
+    } else {
+        try {
+            const token = req.headers.accessToken
+            const payload = verifyJWT(token as string)
+            req.payload = { _id: (await payload)._id, email: (await payload).email }
+            next()
+        } catch (error) {
+            next(createHttpError(401, 'Invalid token in cookies.'))
+        }
+    }
+}
 
 const generateJWT = (payload: IJWTPayload): Promise<string> => {
     return new Promise((resolve, reject) =>

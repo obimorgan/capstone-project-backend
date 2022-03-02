@@ -5,8 +5,8 @@ import { IUser, IUserModel } from '../../interface.d'
 
 const userSchema = new Schema<IUser>({
     name: String,
-    email: { typestring: 'string', required: true },
-    password: { typestring: 'string', required: true },
+    email: String,
+    password: String,
     filename: String,
     avatar: String,
     facebokId: String,
@@ -48,5 +48,5 @@ userSchema.statics.authenticate = async function (email, plainPW) {
     }
 }
 
-const UserModel = model<IUser, IUserModel>('User', userSchema)
-export default UserModel
+const userModel = model<IUser, IUserModel>('User', userSchema)
+export default userModel

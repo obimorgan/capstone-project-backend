@@ -12,7 +12,7 @@ const userSchema = new Schema<IUser>({
     facebokId: String,
     googleId: String,
     instagramId: String,
-    refreshToken: String,
+    refreshJWT: String,
 }, { timestamps: true })
 
 userSchema.pre('save', async function (next) {

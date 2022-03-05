@@ -9,12 +9,12 @@ process.env.TS_NODE_DEV && require("dotenv").config()
 const { JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env
 
 export const JWTAuth = async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.headers.accessToken) {
+    if (!req.cookies.accessToken) {
         next(createHttpError(401, 'No access token provided in cookies.'))
     } else {
         try {
-            const token = req.headers.accessToken
-            const payload = verifyJWT(token as string)
+            const token = req.cookies.accessToken
+            const payload = verifyJWT(token)
             req.payload = { _id: (await payload)._id, email: (await payload).email }
             next()
         } catch (error) {
@@ -40,7 +40,8 @@ const generateRefreshJWT = (payload: IJWTPayload): Promise<string> => {
 export const provideTokens = async (user: IUser) => {
     const accessJWT = await generateJWT({ _id: user._id, email: user.email })
     const refreshJWT = await generateRefreshJWT({ _id: user._id, email: user.email })
-    user.refreshToken = refreshJWT
+    user.accessJWT = accessJWT
+    user.refreshJWT = refreshJWT
     await user.save()
     return { accessJWT, refreshJWT }
 }
@@ -65,7 +66,7 @@ export const verifyJWTsAndRegenerate = async (currentRefreshJWT: string) => {
         const user = await UserModel.findById(payload._id)
         if (!user) throw createHttpError(404, `User with id ${payload._id} does not exist.`)
         const { accessJWT, refreshJWT } = await provideTokens(user)
-        user.refreshToken = refreshJWT
+        user.refreshJWT = refreshJWT
         await user.save()
         return { accessJWT, refreshJWT }
     } catch (error) {

@@ -26,9 +26,9 @@ io.on('connection', socket => {
     } catch (error) {
       console.log(error)
     }
+    // sockt.to()
   })
   socket.on('disconnect', () => { console.log('disconnected')})
-
 })
 
 mongoose.connect(MONGO_CONNECTION!);

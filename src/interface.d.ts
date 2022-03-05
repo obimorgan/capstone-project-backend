@@ -10,7 +10,8 @@ interface IUser extends Document{
     facebokId: String
     googleId: String
     instagramId: String
-    refreshToken: String
+    refreshJWT: String
+    accessJWT?: string
     games: Types.ObjectId[]
 }
 
@@ -23,7 +24,7 @@ interface INewuser {
     instagram: string
 }
 
-interface IJWTPayload {
+export interface IJWTPayload {
     _id: string,
     email: string
 }
@@ -34,8 +35,8 @@ interface IJWTPayload {
 
 interface IReqUser {
     tokens: {
-        accessToken: string
-        refreshToken: string
+        accessJWT: string
+        refreshJWT: string
     }
 }
 

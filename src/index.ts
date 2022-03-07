@@ -16,7 +16,7 @@ io.on('connection', socket => {
   console.log("socketId", socket.id)
 
   // when a host connects --> when client clicks on "create a new game"
-  socket.on('create a game', async(data)=> {
+  socket.on('create a game', async (data)=> {
     console.log("here", data)
     socket.join("game-room")
     console.log("Socket room", socket.rooms)
@@ -27,6 +27,16 @@ io.on('connection', socket => {
       console.log(error)
     }
     // sockt.to()
+  })
+
+  socket.on('join a game', async ({joiningGamepin, users}) => {
+    socket.join("game-room")
+    try {
+      
+      const currentGame = await gamesModel.findByIdAndUpdate
+    } catch (error) {
+      console.log(error)
+    }
   })
   socket.on('disconnect', () => { console.log('disconnected')})
 })

@@ -48,6 +48,7 @@ interface IGame {
 }
 
 interface IHoles {
+    _id: string
     gameName: IGame
     hole1: number,
     hole2: number,

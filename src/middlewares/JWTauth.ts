@@ -18,6 +18,7 @@ export const JWTAuth = async (req: Request, res: Response, next: NextFunction) =
             req.payload = { _id: (await payload)._id, email: (await payload).email }
             next()
         } catch (error) {
+            console.log(error)
             next(createHttpError(401, 'Invalid token in cookies.'))
         }
     }
@@ -40,7 +41,7 @@ const generateRefreshJWT = (payload: IJWTPayload): Promise<string> => {
 export const provideTokens = async (user: IUser) => {
     const accessJWT = await generateJWT({ _id: user._id, email: user.email })
     const refreshJWT = await generateRefreshJWT({ _id: user._id, email: user.email })
-    user.accessJWT = accessJWT
+    // user.accessJWT = accessJWT
     user.refreshJWT = refreshJWT
     await user.save()
     return { accessJWT, refreshJWT }

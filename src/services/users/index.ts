@@ -17,8 +17,8 @@ userRouter
             })
             await newUser.save()
             const { accessJWT, refreshJWT } = await provideTokens(newUser)
-            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'none'})
-            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'none'})
+            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
+            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
             res.status(201).send({accessJWT, refreshJWT})
             console.log(newUser)
         } catch (error) {
@@ -32,10 +32,10 @@ userRouter
             const user = await userModel.authenticate(email, password)
             if (user) {
             const { accessJWT, refreshJWT } = await provideTokens(user)
-            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'none'})
-            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'none'})
+            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
+            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
             res.status(201).send({accessJWT, refreshJWT})
-            console.log(res.cookie)
+            console.log("hello")
             } else { next(createHttpError(401, "Invalid credentials")) }
         } catch (error) {
             next(error)
@@ -47,8 +47,8 @@ userRouter
             const { refreshToken } = req.cookies;
             const { accessJWT, refreshJWT } =
             await verifyJWTsAndRegenerate(refreshToken);
-            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'none'})
-            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'none'})
+            res.cookie('accessToken', accessJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
+            res.cookie('refreshToken', refreshJWT, { httpOnly: true, secure: false, sameSite: 'strict'})
             res.send('Tokens sent');
         } catch (error) {
             next(error);
@@ -58,10 +58,10 @@ userRouter
     // not able to get accesstoken --> using the id instead of the token
     .get('/me/:id', async (req: Request, res: Response, next: NextFunction) => {
         try {
-        const id = req.params.id;
-        if (id) {
+        const params = req.params.id;
+        if (params) {
             console.log(req.payload)
-            const user = await userModel.findById(id)
+            const user = await userModel.findById(params)
             res.send(user)
             console.log(user)
         } else {

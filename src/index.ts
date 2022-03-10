@@ -21,22 +21,52 @@ io.on('connection', socket => {
     socket.join("game-room")
     console.log("Socket room", socket.rooms)
     try {
+      const hostPlayer = data.users
+      const gamePin = data.gamePin
       const newGame = await new gamesModel(data).save()
-      console.log(newGame)
+      console.log("host player ID:", hostPlayer)
+      if (newGame) {
+        try {
+          const addHostToGame = await gamesModel.findOneAndUpdate({gamePin},
+            {
+              $push: {
+              players: {
+                player: hostPlayer
+              }
+            }
+          }, { new: true })
+          console.log("current game:", addHostToGame)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      else { throw new Error("could not add the host to the game")}
     } catch (error) {
       console.log(error)
     }
-    // sockt.to()
+    //sends the user and game details back to host details 
+    socket.emit('display game', data)
   })
 
-  socket.on('join a game', async ({joiningGamepin, users}) => {
+  // when a player join an existing game
+  socket.on('joining a game', async (data) => {
     socket.join("game-room")
     try {
-      
-      const currentGame = await gamesModel.findByIdAndUpdate
+      const newPlayer = data.users
+      const gamePin = data.gamePin
+      const addPlayerToGame = await gamesModel.findOneAndUpdate({ gamePin },
+        {
+          $push: {
+            players: {
+              player: newPlayer
+            }
+          }
+        }, { new: true })
+      console.log("joining game:" , addPlayerToGame)
     } catch (error) {
       console.log(error)
     }
+     socket.emit('display game', data)
   })
   socket.on('disconnect', () => { console.log('disconnected')})
 })

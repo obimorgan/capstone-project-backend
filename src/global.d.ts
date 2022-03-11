@@ -6,6 +6,9 @@ declare module 'express-serve-static-core' {
         user?: IReqUser
         file?: any
     }
+    interface Response {
+        accessJWT: string
+    }
 }
  
 namespace Express {

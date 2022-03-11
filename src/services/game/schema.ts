@@ -6,7 +6,7 @@ const gameSchema = new Schema({
     gameName: String,
     players: [
         {
-            player: { type: Schema.Types.ObjectId, ref: 'User' },
+            player: { type: String, ref: 'User' },
             name: { type: String, ref: 'User' },
             avatar: { type: String, ref: 'User' },
             scores: [holesSchema],

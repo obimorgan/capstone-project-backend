@@ -27,7 +27,7 @@ io.on('connection', socket => {
       console.log("host player ID:", hostPlayer)
       if (newGame) {
         try {
-          const addHostToGame = await gamesModel.findOneAndUpdate({gamePin},
+          const addHostToGame = await gamesModel.findOneAndUpdate({gamePin: gamePin},
             {
               $push: {
               players: {
@@ -54,7 +54,7 @@ io.on('connection', socket => {
     try {
       const newPlayer = data.users
       const gamePin = data.gamePin
-      const addPlayerToGame = await gamesModel.findOneAndUpdate({ gamePin },
+      const addPlayerToGame = await gamesModel.findOneAndUpdate({gamePin: gamePin},
         {
           $push: {
             players: {

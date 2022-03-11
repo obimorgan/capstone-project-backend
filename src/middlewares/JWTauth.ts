@@ -8,6 +8,22 @@ process.env.TS_NODE_DEV && require("dotenv").config()
 
 const { JWT_SECRET_KEY, JWT_REFRESH_SECRET_KEY } = process.env
 
+// export const JWTAuth = async (req: Request, res: Response, next: NextFunction) => {
+//     if (!req.headers.authorization) {
+//         next(createHttpError(401, 'No access token provided in the headers.'))
+//     } else {
+//         try {
+//             const token = req.headers.authorization.replace("Bearer ", "")
+//             const payload = verifyJWT(token)
+//             req.payload = { _id: (await payload)._id, email: (await payload).email }
+//             next()
+//         } catch (error) {
+//             console.log(error)
+//             next(createHttpError(401, 'Invalid token in cookies.'))
+//         }
+//     }
+// }
+
 export const JWTAuth = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.cookies.accessToken) {
         next(createHttpError(401, 'No access token provided in cookies.'))
@@ -16,10 +32,11 @@ export const JWTAuth = async (req: Request, res: Response, next: NextFunction) =
             const token = req.cookies.accessToken
             const payload = verifyJWT(token)
             req.payload = { _id: (await payload)._id, email: (await payload).email }
+            console.log("jwt auth", token)
             next()
         } catch (error) {
             console.log(error)
-            next(createHttpError(401, 'Invalid token in cookies.'))
+            next(createHttpError(401, 'Invalid token in cookies or there is no cookies in payload.'))
         }
     }
 }

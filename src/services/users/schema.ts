@@ -35,7 +35,7 @@ userSchema.methods.toJSON = function () {
 }
 
 userSchema.statics.authenticate = async function (email, plainPW) {
-    const user = await this.findOne({ email })
+    const user = await this.findOne({ email, plainPW})
     if (user) {
         const pwMatch = await bcrypt.compare(plainPW, user.password)
         if (pwMatch) {

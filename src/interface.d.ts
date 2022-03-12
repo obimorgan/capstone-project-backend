@@ -12,7 +12,7 @@ interface IUser extends Document{
     instagramId: String
     refreshJWT: String
     accessJWT?: string
-    games: Types.ObjectId[]
+    games: ISingleGame[]
 }
 
 interface INewuser {
@@ -47,9 +47,10 @@ interface IGame {
     scores: IHoles[]
 }
 
-interface IHoles {
+export interface ISingleGame {
     _id: string
     gameName: IGame
+    gamePin: string
     hole1: number,
     hole2: number,
     hole3: number,

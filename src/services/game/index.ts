@@ -16,15 +16,25 @@ gamesRouter
         }
     })
 
-    .get('/currentgame/:gamePin', async (req: Request, res: Response, next: NextFunction) => {
+    .get('/:id', async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const gamePin = req.params
-            console.log(gamePin)
-            const currentgame = await gameModel.findOne(gamePin)
-            res.status(200).send(currentgame)
+            const currentGame = await gameModel.findById(req.params.id)
+            res.status(200).send(currentGame)
         } catch (error) {
             next(createHttpError(400, "Game does not exist"))
         }
     })
+
+    // .put('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    //     try {
+    //         const currentGame = await gameModel.findById(req.params.id)
+    //         if (!currentGame) return createHttpError(400, "Game does not exist")
+    //         const currentPlayer = await userModel
+    //     } catch (error) {
+    //         next(createHttpError(400, "Game does not exist"))
+    //     }
+    // })
+
+    // .put('')
 
 export default gamesRouter

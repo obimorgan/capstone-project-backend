@@ -1,8 +1,9 @@
 import { model, Schema } from 'mongoose'
-import { IHoles } from '../../interface'
+import { ISingleGame } from '../../interface'
 
-export const holesSchema = new Schema<IHoles>({
-    gameName: {type: Schema.Types.ObjectId, ref: 'Games'},
+export const holesSchema = new Schema<ISingleGame>({
+    gameName: { type: Schema.Types.ObjectId, ref: 'Games' },
+    gamePin: String,
     hole1: { type: Number, defult: 0},
     hole2: { type: Number, defult: 0},
     hole3: { type: Number, defult: 0},

@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 import { IUser, IUserModel } from '../../interface.d'
+import { holesSchema } from '../game/holesSchema'
 
 
 const userSchema = new Schema<IUser>({
@@ -13,6 +14,7 @@ const userSchema = new Schema<IUser>({
     googleId: String,
     instagramId: String,
     refreshJWT: String,
+    games: [{type: Schema.Types.ObjectId, ref: 'Games' }]
 }, { timestamps: true })
 
 userSchema.pre('save', async function (next) {

@@ -2,7 +2,6 @@ import { createServer } from 'http'
 import mongoose from 'mongoose'
 import { Server } from 'socket.io'
 import server from './server'
-import game from './services/game'
 import gamesModel from './services/game/schema'
 
 
@@ -13,7 +12,7 @@ const httpServer = createServer(server)
 const io = new Server(httpServer, {})
 
 io.on('connection', socket => { 
-  console.log("socketId", socket.id)
+  // console.log("socketId", socket.id)
 
   // when a host connects --> when client clicks on "create a new game"
   socket.on('create a game', async (data)=> {
@@ -31,11 +30,14 @@ io.on('connection', socket => {
             {
               $push: {
               players: {
-                player: hostPlayer
+                  player: hostPlayer,
+                  name: data.name,
+                  avatar: data.avatar
               }
             }
-          }, { new: true })
-          console.log("current game:", addHostToGame)
+            }, { new: true })
+          // ---emit--- //
+          socket.emit('display game', addHostToGame)
         } catch (error) {
           console.log(error)
         }
@@ -44,8 +46,6 @@ io.on('connection', socket => {
     } catch (error) {
       console.log(error)
     }
-    //sends the user and game details back to host details 
-    socket.emit('display game', data)
   })
 
   // when a player join an existing game
@@ -58,16 +58,23 @@ io.on('connection', socket => {
         {
           $push: {
             players: {
-              player: newPlayer
+              player: newPlayer,
+              name: data.name,
+              avatar: data.avatar
             }
           }
         }, { new: true })
-      console.log("joining game:" , addPlayerToGame)
+      // ---emit--- //
+      socket.emit('display game', addPlayerToGame)
     } catch (error) {
       console.log(error)
     }
-     socket.emit('display game', data)
   })
+
+  socket.on('submit scores', async (data) => {
+    
+  })
+
   socket.on('disconnect', () => { console.log('disconnected')})
 })
 

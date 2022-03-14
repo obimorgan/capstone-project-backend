@@ -105,7 +105,7 @@ io.on('connection', socket => {
           { _id: gameId},
           {
             $push: {
-               hole1: {
+               hole2: {
               $each: [
                 { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
                 { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
@@ -130,7 +130,7 @@ io.on('connection', socket => {
           { _id: gameId},
           {
             $push: {
-               hole1: {
+               hole3: {
               $each: [
                 { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
                 { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },

@@ -16,6 +16,15 @@ gamesRouter
         }
     })
 
+    .get('/', async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const games = await gameModel.find()
+            res.status(200).send(games)
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
     .get('/:id', async (req: Request, res: Response, next: NextFunction) => {
         try {
             const currentGame = await gameModel.findById(req.params.id)

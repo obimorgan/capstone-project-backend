@@ -32,7 +32,8 @@ io.on('connection', socket => {
               players: {
                   player: hostPlayer,
                   name: data.name,
-                  avatar: data.avatar
+                  avatar: data.avatar,
+                  playing: true
               }
             }
             }, { new: true })
@@ -60,7 +61,8 @@ io.on('connection', socket => {
             players: {
               player: newPlayer,
               name: data.name,
-              avatar: data.avatar
+               avatar: data.avatar,
+              playing: true
             }
           }
         }, { new: true })
@@ -71,10 +73,80 @@ io.on('connection', socket => {
     }
   })
 
-  socket.on('submit scores', async (data) => {
-    
+  socket.on('hole1', async (data) => {
+    try {
+      const gameId = data[0].gameId;
+      const currentGame = await gamesModel.findByIdAndUpdate(
+        { _id: gameId },
+        {
+          $push: {
+            hole1: {
+              $each: [
+                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
+                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
+                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
+                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
+              ]
+            }
+          }
+          }
+      )
+        socket.emit('hole1', (currentGame))
+      } catch (error) {
+        console.log(error)
+    }
   })
 
+  socket.on('hole2', async (data) => {
+    try {
+        const gameId = data[0].gameId;
+        console.log(gameId);
+        const currentGame = await gamesModel.findByIdAndUpdate(
+          { _id: gameId},
+          {
+            $push: {
+               hole1: {
+              $each: [
+                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
+                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
+                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
+                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
+              ]
+            }
+            }
+          }
+        )
+        socket.emit('hole2', (currentGame))
+      } catch (error) {
+        console.log(error)
+    }
+  })
+
+  socket.on('hole3', async (data) => {
+    try {
+        const gameId = data[0].gameId;
+        console.log(gameId);
+        const currentGame = await gamesModel.findByIdAndUpdate(
+          { _id: gameId},
+          {
+            $push: {
+               hole1: {
+              $each: [
+                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
+                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
+                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
+                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
+              ]
+            }
+            }
+          }
+        )
+        socket.emit('hole3', (currentGame))
+      } catch (error) {
+        console.log(error)
+    }
+  })
+  
   socket.on('disconnect', () => { console.log('disconnected')})
 })
 

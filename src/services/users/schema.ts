@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose'
 import bcrypt from 'bcrypt'
 import { IUser, IUserModel } from '../../interface.d'
-import { holesSchema } from '../game/holesSchema'
 
 
 const userSchema = new Schema<IUser>({

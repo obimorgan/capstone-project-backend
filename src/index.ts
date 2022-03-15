@@ -86,7 +86,7 @@ io.on('connection', socket => {
                 { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
                 { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
                 { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
-              ]
+              ],
             }
           }
           }
@@ -110,7 +110,7 @@ io.on('connection', socket => {
                 { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
                 { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
                 { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
-                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
+                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id },
               ]
             }
             }
@@ -131,7 +131,7 @@ io.on('connection', socket => {
           {
             $push: {
                hole3: {
-              $each: [
+              $each: [ 
                 { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
                 { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
                 { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },

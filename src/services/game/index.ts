@@ -34,16 +34,42 @@ gamesRouter
         }
     })
 
-    // .put('/:id', async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const currentGame = await gameModel.findById(req.params.id)
-    //         if (!currentGame) return createHttpError(400, "Game does not exist")
-    //         const currentPlayer = await userModel
-    //     } catch (error) {
-    //         next(createHttpError(400, "Game does not exist"))
-    //     }
-    // })
+    .get('/:id/hole1', async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const currentGame = await gameModel.findById(req.params.id)
+            if (currentGame) {
+                const hole = currentGame.hole1
+                res.status(200).send(hole.reverse().reverse())
+            } else { next(createHttpError(400, "Bad Request")) }
+        } catch (error) {
+            next(createHttpError(400, "Game does not exist"))
+        }
+    })
 
-    // .put('')
+    .get('/:id/hole2', async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const currentGame = await gameModel.findById(req.params.id)
+            if (currentGame) {
+                const hole = currentGame.hole2
+                res.status(200).send(hole.reverse().reverse())
+            } else { next(createHttpError(400, "Bad Request")) }
+        } catch (error) {
+            next(createHttpError(400, "Game does not exist"))
+        }
+    })
+
+    .get('/:id/hole3', async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const currentGame = await gameModel.findById(req.params.id)
+            if (currentGame) {
+                const hole = currentGame.hole3
+                res.status(200).send(hole.reverse().reverse())
+            } else { next(createHttpError(400, "Bad Request")) }
+        } catch (error) {
+            next(createHttpError(400, "Game does not exist"))
+        }
+    })
 
 export default gamesRouter
+
+

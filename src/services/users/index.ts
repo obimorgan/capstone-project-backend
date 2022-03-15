@@ -56,23 +56,6 @@ userRouter
         }
     })
 
-    // not able to get accesstoken --> using the id instead of the token
-    // .get('/me/:id', async (req: Request, res: Response, next: NextFunction) => {
-    //     try {
-    //         const params = req.params.id;
-    //         if (params) {
-    //             console.log(req.payload)
-    //             const user = await userModel.findById(params)
-    //             res.send(user)
-    //             console.log(user)
-    //         } else {
-    //             next(createHttpError(400, 'Invalid request.'))
-    //         }
-    //     } catch (error) {
-    //         next(error)
-    //     }
-    // })
-
     .get('/me', JWTAuth, async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (req.payload) {

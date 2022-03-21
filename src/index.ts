@@ -35,31 +35,28 @@ io.on('connection', socket => {
                   playerId: userId,
                   name: data.name,
                   avatar: data.avatar,
-                  playing: true
+                  playing: true,
+                  totalScore: 0
                 },
                 hole1: {
                   playerId: userId,
                   name: name,
                   score: 0,
-                  totalScore: 0
                 },
                 hole2: {
                   playerId: userId,
                   name: name,
                   score: 0,
-                  totalScore: 0
                 },
                 hole3: {
                   playerId: userId,
                   name: name,
                   score: 0,
-                  totalScore: 0
                 },
                 hole4: {
                   playerId: userId,
                   name: name,
                   score: 0,
-                  totalScore: 0
                 }
               }
             }, { new: true })
@@ -89,31 +86,28 @@ io.on('connection', socket => {
               playerId: userId,
               name: data.name,
               avatar: data.avatar,
-              playing: true
+              playing: true,
+              totalScore: 0
             },
             hole1: {
               playerId: userId,
               name: name,
               score: 0,
-              totalScore: 0
             },
             hole2: {
               playerId: userId,
               name: name,
               score: 0,
-              totalScore: 0
             },
             hole3: {
               playerId: userId,
               name: name,
               score: 0,
-              totalScore: 0
             },
             hole4: {
               playerId: userId,
               name: name,
               score: 0,
-              totalScore: 0
             },
           }
         }, { new: true })
@@ -122,81 +116,6 @@ io.on('connection', socket => {
       socket.broadcast.emit('new player joined')
     } catch (error) {
       console.log(error)
-    }
-  })
-
-
-  socket.on('hole1', async (data) => {
-    try {
-      const gameId = data[0].gameId;
-      const currentGame = await gamesModel.findByIdAndUpdate(
-        { _id: gameId },
-        {
-          $push: {
-            hole1: {
-              $each: [
-                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
-                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
-                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
-                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
-              ],
-            }
-          }
-        }
-      )
-      socket.emit('hole1', (currentGame))
-    } catch (error) {
-      console.log(error)
-    }
-  });
-
-  socket.on('hole2', async (data) => {
-    try {
-        const gameId = data[0].gameId;
-        console.log(gameId);
-        const currentGame = await gamesModel.findByIdAndUpdate(
-          { _id: gameId},
-          {
-            $push: {
-               hole2: {
-              $each: [
-                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
-                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
-                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
-                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id },
-              ]
-            }
-            }
-          }
-        )
-        socket.emit('hole2', (currentGame))
-      } catch (error) {
-        console.log(error)
-    }
-  })
-
-  socket.on('hole3', async (data) => {
-    try {
-        const gameId = data[0].gameId;
-        console.log(gameId);
-        const currentGame = await gamesModel.findByIdAndUpdate(
-          { _id: gameId},
-          {
-            $push: {
-               hole3: {
-              $each: [ 
-                { score: data[1].player1.score, name: data[1].player1.name, id: data[1].player1.id },
-                { score: data[2].player2.score, name: data[2].player2.name, id: data[2].player2.id },
-                { score: data[3].player3.score, name: data[3].player3.name, id: data[3].player3.id },
-                { score: data[4].player4.score, name: data[4].player4.name, id: data[4].player4.id }
-              ]
-            }
-            }
-          }
-        )
-        socket.emit('hole3', (currentGame))
-      } catch (error) {
-        console.log(error)
     }
   })
   

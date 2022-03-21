@@ -15,6 +15,7 @@ export const gameSchema = new Schema({
             playing: { type: Boolean },
             name: { type: String, ref: 'User' },
             avatar: { type: String, ref: 'User' },
+            totalScore: Number
         }
     ],
     hole1: [

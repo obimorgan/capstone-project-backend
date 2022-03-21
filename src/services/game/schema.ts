@@ -11,7 +11,7 @@ export const gameSchema = new Schema({
     gameName: String,
     players: [
         {
-            player: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, ref: 'User' },
             playing: { type: Boolean },
             name: { type: String, ref: 'User' },
             avatar: { type: String, ref: 'User' },
@@ -20,415 +20,487 @@ export const gameSchema = new Schema({
     hole1: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole2: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole3: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole4: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole5: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole6: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole7: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole8: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole9: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole10: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole11: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
      hole12: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole13: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole14: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole15: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole16: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole17: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
     hole18: [
         {
             name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                 {
             name: String,
-           id: { type: String, ref: 'User' },
+           playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
                         {
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         },
         {
                                     
            name: String,
-            id: { type: String, ref: 'User' },
+            playerId: { type: Schema.Types.ObjectId, String, ref: 'User' },
             score: Number,
+            totalScore: Number,
         }
     ],
 

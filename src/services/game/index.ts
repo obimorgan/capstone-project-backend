@@ -36,11 +36,10 @@ gamesRouter
 
     .get('/:id/hole1', async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const currentGame = await gameModel.findById(req.params.id)
-            if (currentGame) {
-                const hole = currentGame.hole1
-                res.status(200).send(hole.reverse().reverse())
-            } else { next(createHttpError(400, "Bad Request")) }
+            const game = await gameModel.findById(req.params.id)
+            if (!game) throw createHttpError(404, "Game does not exist")
+            const hole1 = game.hole1
+            res.send(hole1)
         } catch (error) {
             next(createHttpError(400, "Game does not exist"))
         }

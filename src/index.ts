@@ -13,29 +13,55 @@ const io = new Server(httpServer, {})
 
 io.on('connection', socket => { 
   // console.log("socketId", socket.id)
+  // socket.join("game-room")
 
   // when a host connects --> when client clicks on "create a new game"
-  socket.on('create a game', async (data)=> {
+  socket.on('create a game', async (data) => {
     console.log("here", data)
     socket.join("game-room")
     console.log("Socket room", socket.rooms)
     try {
-      const hostPlayer = data.users
+      const name = data.name
+      const userId = data.userId
       const gamePin = data.gamePin
-      const newGame = await new gamesModel(data).save()
-      console.log("host player ID:", hostPlayer)
+      const newGame = await new gamesModel(data).save()//ceate a game
+      console.log("host player ID:", userId)
       if (newGame) {
         try {
-          const addHostToGame = await gamesModel.findOneAndUpdate({gamePin: gamePin},
+          const addHostToGame = await gamesModel.findOneAndUpdate({ gamePin: gamePin },
             {
               $push: {
-              players: {
-                  player: hostPlayer,
+                players: {
+                  playerId: userId,
                   name: data.name,
                   avatar: data.avatar,
                   playing: true
+                },
+                hole1: {
+                  playerId: userId,
+                  name: name,
+                  score: 0,
+                  totalScore: 0
+                },
+                hole2: {
+                  playerId: userId,
+                  name: name,
+                  score: 0,
+                  totalScore: 0
+                },
+                hole3: {
+                  playerId: userId,
+                  name: name,
+                  score: 0,
+                  totalScore: 0
+                },
+                hole4: {
+                  playerId: userId,
+                  name: name,
+                  score: 0,
+                  totalScore: 0
+                }
               }
-            }
             }, { new: true })
           // ---emit--- //
           socket.emit('display game', addHostToGame)
@@ -43,35 +69,62 @@ io.on('connection', socket => {
           console.log(error)
         }
       }
-      else { throw new Error("could not add the host to the game")}
+      else { throw new Error("could not add the host to the game") }
     } catch (error) {
       console.log(error)
     }
-  })
+  });
 
   // when a player join an existing game
   socket.on('joining a game', async (data) => {
-    socket.join("game-room")
+    // socket.join("game-room")
     try {
-      const newPlayer = data.users
+      const name = data.name
+      const userId = data.userId
       const gamePin = data.gamePin
       const addPlayerToGame = await gamesModel.findOneAndUpdate({gamePin: gamePin},
         {
           $push: {
             players: {
-              player: newPlayer,
+              playerId: userId,
               name: data.name,
-               avatar: data.avatar,
+              avatar: data.avatar,
               playing: true
-            }
+            },
+            hole1: {
+              playerId: userId,
+              name: name,
+              score: 0,
+              totalScore: 0
+            },
+            hole2: {
+              playerId: userId,
+              name: name,
+              score: 0,
+              totalScore: 0
+            },
+            hole3: {
+              playerId: userId,
+              name: name,
+              score: 0,
+              totalScore: 0
+            },
+            hole4: {
+              playerId: userId,
+              name: name,
+              score: 0,
+              totalScore: 0
+            },
           }
         }, { new: true })
       // ---emit--- //
-      socket.emit('display game', addPlayerToGame)
+      socket.emit('joining player', addPlayerToGame)
+      socket.broadcast.emit('new player joined')
     } catch (error) {
       console.log(error)
     }
   })
+
 
   socket.on('hole1', async (data) => {
     try {
@@ -89,13 +142,13 @@ io.on('connection', socket => {
               ],
             }
           }
-          }
+        }
       )
-        socket.emit('hole1', (currentGame))
-      } catch (error) {
-        console.log(error)
+      socket.emit('hole1', (currentGame))
+    } catch (error) {
+      console.log(error)
     }
-  })
+  });
 
   socket.on('hole2', async (data) => {
     try {

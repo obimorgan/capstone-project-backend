@@ -94,6 +94,19 @@ userRouter
 		}
 	})
 
+	.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			if (req.params.id) {
+				const user = await userModel.findById(req.params.id)
+				if (user) {
+					res.send(user)
+				} else next(createHttpError(404, `There is no user with this Id: ${req.params.id}`))
+			} else next(createHttpError(400, 'Invalid request.'))
+		} catch (error) {
+			next(error)
+		}
+	})
+
 	.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const user = await userModel.find()

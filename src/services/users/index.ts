@@ -118,4 +118,39 @@ userRouter
 		}
 	})
 
+	.put('/:playerId', async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const { totalScore } = req.body
+			console.log(totalScore)
+			const user = await userModel.findById(req.params.playerId)
+			if (!user) next(createHttpError(404, 'user does not exist'))
+			const userCurrentBestScore = user?.bestScore
+			console.log(`Is the current bestScore: ${userCurrentBestScore} biogger than the totalScore: ${totalScore}`)
+			if (userCurrentBestScore! > totalScore) {
+				console.log(userCurrentBestScore)
+				const updatedBestScore = await userModel.findByIdAndUpdate(
+					req.params.playerId,
+					{ bestScore: totalScore },
+					{ new: true },
+				)
+				console.log("Player's best score has been updated")
+			} else {
+				console.log("Player's total score did not beat the current best score")
+			}
+			res.status(201).send("Player's best score has been updated")
+		} catch (error) {
+			console.log(error)
+			next(createHttpError(400, 'Bad Request'))
+		}
+	})
+
+	.put('/:playerId/editprofile', async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const editedUser = await userModel.findByIdAndUpdate(req.params.playerId, req.body, { new: true })
+			res.sendStatus(200)
+		} catch (error) {
+			next(createHttpError(400, 'Bad Request'))
+		}
+	})
+
 export default userRouter

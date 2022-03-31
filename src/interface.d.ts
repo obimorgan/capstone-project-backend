@@ -14,7 +14,7 @@ interface IUser extends Document {
 	instagramId: String
 	refreshJWT: String
 	accessJWT?: string
-	bestScore: number
+	bestScore?: number
 }
 
 interface INewuser {

@@ -3,8 +3,10 @@
 import { createServer } from 'http'
 import mongoose from 'mongoose'
 import { Server } from 'socket.io'
+import { IUser } from './interface'
 import server from './server'
 import gamesModel from './services/game/schema'
+import userModel from './services/users/schema'
 
 process.env.TS_NODE_DEV && require('dotenv').config()
 const { MONGO_CONNECTION, PORT } = process.env
@@ -12,9 +14,9 @@ const { MONGO_CONNECTION, PORT } = process.env
 const httpServer = createServer(server)
 const io = new Server(httpServer, {})
 
-io.on('connection', (socket) => {
-	// console.log("socketId", socket.id)
-	// socket.join("game-room")
+io.on('connect', (socket) => {
+	// console.log('socketId', socket.id)
+	// socket.join('game-room')
 
 	// when a host connects --> when client clicks on "create a new game"
 	socket.on('create a game', async (data) => {
@@ -60,6 +62,11 @@ io.on('connection', (socket) => {
 									name: name,
 									score: 0,
 								},
+								hole18: {
+									playerId: userId,
+									name: name,
+									score: 0,
+								},
 							},
 						},
 						{ new: true },
@@ -79,7 +86,7 @@ io.on('connection', (socket) => {
 
 	// when a player join an existing game
 	socket.on('joining a game', async (data) => {
-		// socket.join("game-room")
+		socket.join('game-room')
 		try {
 			const name = data.name
 			const userId = data.userId
@@ -115,13 +122,38 @@ io.on('connection', (socket) => {
 							name: name,
 							score: 0,
 						},
+						hole18: {
+							playerId: userId,
+							name: name,
+							score: 0,
+						},
 					},
 				},
 				{ new: true },
 			)
 			// ---emit--- //
 			socket.emit('joining player', addPlayerToGame)
-			socket.broadcast.emit('new player joined')
+			// socket.broadcast.emit('new player joined')
+		} catch (error) {
+			console.log(error)
+		}
+	})
+
+	socket.on('submit my total score', async (data) => {
+		try {
+			const { myId, totalScore } = data
+			const user = await userModel.findById(myId)
+			const bestScore = user?.bestScore
+			// console.log(`Is best score: ${bestScore} > totalScore: ${totalScore}`)
+			if (bestScore! > totalScore) {
+				const updateUserBestScore = await userModel.findByIdAndUpdate(myId, {
+					$set: {
+						bestScore: totalScore,
+					},
+				})
+				console.log('best score is updated')
+				socket.emit('current best score updated')
+			}
 		} catch (error) {
 			console.log(error)
 		}

@@ -53,3 +53,11 @@ export interface IHole {
 	player: string
 	score: Number
 }
+
+export interface IAdmin {
+	rules: ISingleRule[]
+}
+
+interface ISingleRule {
+	rule: string
+}

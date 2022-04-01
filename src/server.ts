@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import createHttpError from 'http-errors'
 import userRouter from './services/users'
 import gamesRouter from './services/game'
+import adminRouter from './services/admin'
 
 const server = express()
 const whitelist = ['http://localhost:3000']
@@ -26,5 +27,6 @@ server.use(cookieParser())
 
 server.use('/user', userRouter)
 server.use('/games', gamesRouter)
+server.use('/admin', adminRouter)
 
 export default server

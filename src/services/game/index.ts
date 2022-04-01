@@ -2,7 +2,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express'
 import createHttpError from 'http-errors'
-import { TypePredicateKind } from 'typescript'
 import gameModel from './schema'
 
 const gamesRouter = Router()

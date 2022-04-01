@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import { Server } from 'socket.io'
 import { IUser } from './interface'
 import server from './server'
-import gamesModel from './services/game/schema'
+import gameModel from './services/game/schema'
 import userModel from './services/users/schema'
 
 process.env.TS_NODE_DEV && require('dotenv').config()
@@ -27,11 +27,11 @@ io.on('connect', (socket) => {
 			const name = data.name
 			const userId = data.userId
 			const gamePin = data.gamePin
-			const newGame = await new gamesModel(data).save() //ceate a game
+			const newGame = await new gameModel(data).save() //ceate a game
 			console.log('host player ID:', userId)
 			if (newGame) {
 				try {
-					const addHostToGame = await gamesModel.findOneAndUpdate(
+					const addHostToGame = await gameModel.findOneAndUpdate(
 						{ gamePin: gamePin },
 						{
 							$push: {
@@ -91,7 +91,7 @@ io.on('connect', (socket) => {
 			const name = data.name
 			const userId = data.userId
 			const gamePin = data.gamePin
-			const addPlayerToGame = await gamesModel.findOneAndUpdate(
+			const addPlayerToGame = await gameModel.findOneAndUpdate(
 				{ gamePin: gamePin },
 				{
 					$push: {

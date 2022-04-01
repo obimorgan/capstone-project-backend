@@ -1,3 +1,5 @@
+/** @format */
+
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -18,14 +20,11 @@ const whitelist = ['http://localhost:3000']
 //     credentials: true
 // }
 // server.use(cors(corsOptions))
-server.use(cors({ origin: true, credentials: true }));
+server.use(cors({ origin: true, credentials: true }))
 server.use(express.json())
 server.use(cookieParser())
 
-server.use("/user", userRouter)
-server.use("/games", gamesRouter)
+server.use('/user', userRouter)
+server.use('/games', gamesRouter)
 
 export default server
-
-
- 

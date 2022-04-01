@@ -7,6 +7,22 @@ import gameModel from './schema'
 
 const gamesRouter = Router()
 
+gamesRouter.get('/todays', async (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const start = new Date()
+		start.setHours(0, 0, 0, 0)
+		const end = new Date()
+		end.setHours(23, 59, 59, 999)
+		const todaysGames = await gameModel.find({ createdAt: { $gte: start, $lt: end } })
+		if (!todaysGames) next(createHttpError(500, 'Server Error'))
+		let players: any[] = []
+		const getPlayers = todaysGames.forEach((game) => game.players.forEach((player: any) => players.push(player)))
+		res.status(200).send(players)
+	} catch (error) {
+		console.log(error)
+	}
+})
+
 gamesRouter
 	.post('/create', async (req: Request, res: Response, next: NextFunction) => {
 		try {

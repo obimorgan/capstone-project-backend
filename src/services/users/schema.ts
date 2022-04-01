@@ -15,7 +15,7 @@ const userSchema = new Schema<IUser>(
 		googleId: String,
 		instagramId: String,
 		refreshJWT: String,
-		bestScore: { type: Number, default: 0 },
+		bestScore: { type: Number },
 	},
 	{ timestamps: true },
 )

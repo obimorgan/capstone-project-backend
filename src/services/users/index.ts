@@ -3,6 +3,7 @@
 import express, { NextFunction, Response, Request } from 'express'
 import createHttpError from 'http-errors'
 import { JWTAuth, provideTokens, verifyJWTsAndRegenerate } from '../../middlewares/JWTauth'
+import { cloudinary, parser } from '../../utils/cloudinary'
 import userModel from './schema'
 
 const userRouter = express.Router()
@@ -75,6 +76,7 @@ userRouter
 				secure: NODE_ENV === 'production' ? true : false,
 				sameSite: NODE_ENV === 'production' ? 'none' : undefined,
 			})
+			console.log('refreshToken')
 			res.send('Tokens sent')
 		} catch (error) {
 			next(error)
@@ -125,7 +127,6 @@ userRouter
 			const user = await userModel.findById(req.params.playerId)
 			if (!user) next(createHttpError(404, 'user does not exist'))
 			const userCurrentBestScore = user?.bestScore
-			console.log(`Is the current bestScore: ${userCurrentBestScore} biogger than the totalScore: ${totalScore}`)
 			if (userCurrentBestScore! > totalScore) {
 				console.log(userCurrentBestScore)
 				const updatedBestScore = await userModel.findByIdAndUpdate(
@@ -144,12 +145,39 @@ userRouter
 		}
 	})
 
-	.put('/:playerId/editprofile', async (req: Request, res: Response, next: NextFunction) => {
+	// .put('/:playerId/editprofile', async (req: Request, res: Response, next: NextFunction) => {
+	// 	try {
+	// 		const editedUser = await userModel.findByIdAndUpdate(req.params.playerId, req.body, { new: true })
+	// 		res.sendStatus(200)
+	// 	} catch (error) {
+	// 		next(createHttpError(400, 'Bad Request'))
+	// 	}
+	// })
+
+	.put('/:id/editprofile', parser.single('profile'), async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const editedUser = await userModel.findByIdAndUpdate(req.params.playerId, req.body, { new: true })
-			res.sendStatus(200)
+			if (req.params.id) {
+				const oldUser = await userModel.findById(req.params.id)
+				if (oldUser) {
+					// const body = {
+					// 	...req.body,
+					// 	avatar: req.file?.path || oldUser.avatar,
+					// 	filename: req.file?.filename || oldUser.filename,
+					// }
+					const editedUser = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+					if (!editedUser) return next(createHttpError(404, `User with id ${req.params.id} does not exist.`))
+					// if (oldUser.filename && req.file) {
+					// 	await cloudinary.uploader.destroy(oldUser.filename)
+					// }
+					res.send(editedUser)
+				} else {
+					next(createHttpError(404, `User with id ${req.params.id} does not exist.`))
+				}
+			} else {
+				next(createHttpError(400, 'Invalid request.'))
+			}
 		} catch (error) {
-			next(createHttpError(400, 'Bad Request'))
+			next(error)
 		}
 	})
 

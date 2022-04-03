@@ -21,7 +21,7 @@ io.on('connect', (socket) => {
 	// when a host connects --> when client clicks on "create a new game"
 	socket.on('create a game', async (data) => {
 		console.log('here', data)
-		socket.join('game-room')
+		// socket.join('game-room')
 		console.log('Socket room', socket.rooms)
 		try {
 			const name = data.name
@@ -86,7 +86,7 @@ io.on('connect', (socket) => {
 
 	// when a player join an existing game
 	socket.on('joining a game', async (data) => {
-		socket.join('game-room')
+		// socket.join('game-room')
 		try {
 			const name = data.name
 			const userId = data.userId

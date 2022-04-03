@@ -7,10 +7,10 @@ interface IUser extends Document {
 	name: string
 	email: string
 	password: string
-	filename: String
-	avatar: String
+	filename: string
+	avatar: string
 	facebokId: String
-	googleId: String
+	googleId: string
 	instagramId: String
 	refreshJWT: String
 	accessJWT?: string

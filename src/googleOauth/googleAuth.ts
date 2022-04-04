@@ -24,7 +24,7 @@ const googleStrategy = new GoogleStrategy.Strategy(
 			} else {
 				const newUser = new userModel({
 					name: profile.name.givenName,
-					email: profile._json.email,
+					email: profile.email,
 					googleId: profile.id,
 				})
 				const savedUser = await newUser.save()

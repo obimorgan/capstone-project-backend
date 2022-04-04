@@ -152,8 +152,26 @@ io.on('connect', (socket) => {
 					},
 				})
 				console.log('best score is updated')
-				socket.emit('current best score updated')
 			}
+		} catch (error) {
+			console.log(error)
+		}
+		socket.emit('current best score updated')
+	})
+
+	socket.on('disconnect', () => {
+		console.log('disconnected')
+	})
+
+	socket.on('set total score', async (data) => {
+		try {
+			const { gameId, totalScores } = data
+			const game = await gameModel.findByIdAndUpdate(gameId, {
+				$set: {
+					players: totalScores,
+				},
+			})
+			console.log('set players totalScore')
 		} catch (error) {
 			console.log(error)
 		}

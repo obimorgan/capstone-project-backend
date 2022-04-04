@@ -144,8 +144,8 @@ io.on('connect', (socket) => {
 			const { myId, totalScore } = data
 			const user = await userModel.findById(myId)
 			const bestScore = user?.bestScore
-			// console.log(`Is best score: ${bestScore} > totalScore: ${totalScore}`)
-			if (bestScore! > totalScore) {
+			console.log(`Is best score: ${bestScore} > totalScore: ${totalScore}`)
+			if (bestScore! > totalScore || bestScore === undefined) {
 				const updateUserBestScore = await userModel.findByIdAndUpdate(myId, {
 					$set: {
 						bestScore: totalScore,

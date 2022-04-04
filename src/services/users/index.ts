@@ -1,9 +1,9 @@
 /** @format */
 
-import express, { NextFunction, Response, Request } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import createHttpError from 'http-errors'
 import { JWTAuth, provideTokens, verifyJWTsAndRegenerate } from '../../middlewares/JWTauth'
-import { cloudinary, parser } from '../../utils/cloudinary'
+import { parser } from '../../utils/cloudinary'
 import userModel from './schema'
 
 const userRouter = express.Router()
@@ -37,6 +37,7 @@ userRouter
 			next(error)
 		}
 	})
+
 	.post('/login', async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const { email, password } = req.body

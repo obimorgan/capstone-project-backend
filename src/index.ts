@@ -52,16 +52,16 @@ io.on('connect', (socket) => {
 									name: name,
 									score: 0,
 								},
-								hole3: {
-									playerId: userId,
-									name: name,
-									score: 0,
-								},
-								hole4: {
-									playerId: userId,
-									name: name,
-									score: 0,
-								},
+								// hole3: {
+								// 	playerId: userId,
+								// 	name: name,
+								// 	score: 0,
+								// },
+								// hole4: {
+								// 	playerId: userId,
+								// 	name: name,
+								// 	score: 0,
+								// },
 								hole18: {
 									playerId: userId,
 									name: name,
@@ -112,16 +112,16 @@ io.on('connect', (socket) => {
 							name: name,
 							score: 0,
 						},
-						hole3: {
-							playerId: userId,
-							name: name,
-							score: 0,
-						},
-						hole4: {
-							playerId: userId,
-							name: name,
-							score: 0,
-						},
+						// hole3: {
+						// 	playerId: userId,
+						// 	name: name,
+						// 	score: 0,
+						// },
+						// hole4: {
+						// 	playerId: userId,
+						// 	name: name,
+						// 	score: 0,
+						// },
 						hole18: {
 							playerId: userId,
 							name: name,
